@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Naturaleza Sutil - Centro de Ayuda Emocional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #4a4a4a;
+            line-height: 1.6;
+            background-color: #faf8f5;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: #5a7a8c;
+        }
+        header {
+            background-color: #fff;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            color: #5a7a8c;
+            font-weight: 600;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: #4a4a4a;
+            transition: color 0.3s;
+            font-weight: 400;
+        }
+        nav a:hover {
+            color: #6ba3b8;
+        }
+        .lang-toggle {
+            background: linear-gradient(135deg, #6ba3b8 0%, #5a7a8c 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            transition: transform 0.3s;
+        }
+        .lang-toggle:hover {
+            transform: translateY(-2px);
+        }
+        .hero {
+            background: linear-gradient(rgba(90, 122, 140, 0.1), rgba(107, 163, 184, 0.1)),
+                        url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1600') center/cover;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #4a4a4a;
+        }
+        .hero-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 700px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .cta-button {
+            background: linear-gradient(135deg, #6ba3b8 0%, #5a7a8c 100%);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(90, 122, 140, 0.3);
+        }
+        section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #5a7a8c;
+        }
+        .about-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(90, 122, 140, 0.2);
+        }
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: #5a7a8c;
+        }
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .technique-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+        }
+        .technique-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(90, 122, 140, 0.2);
+        }
+        .technique-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .technique-card h3 {
+            margin-bottom: 0.5rem;
+            color: #5a7a8c;
+            font-size: 1.1rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s;
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #5a7a8c;
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e8e8e8;
+        }
+        .modal-icon {
+            font-size: 3rem;
+        }
+        .modal-title {
+            color: #5a7a8c;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        .modal-subtitle {
+            color: #6ba3b8;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .modal-body {
+            line-height: 1.8;
+        }
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+        .modal-body ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+        .modal-summary {
+            background: #f0f7fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #6ba3b8;
+        }
+        .modal-summary strong {
+            color: #5a7a8c;
+        }
+        .therapist-modal-content {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .therapist-image-container {
+            flex-shrink: 0;
+        }
+        .therapist-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .therapist-text {
+            flex: 1;
+        }
+        .therapist-name {
+            color: #5a7a8c;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .therapist-credentials {
+            color: #6ba3b8;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        .approach-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .approach-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        .approach-item h3 {
+            margin-bottom: 1rem;
+            color: #6ba3b8;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            font-style: italic;
+        }
+        .testimonial-author {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #5a7a8c;
+            font-style: normal;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        .blog-image {
+            width: 100%;
+            height: 200px;
+        }
+        .blog-content {
+            padding: 1.5rem;
+        }
+        .blog-card h3 {
+            margin-bottom: 1rem;
+            color: #5a7a8c;
+        }
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .contact-item strong {
+            color: #5a7a8c;
+            font-size: 1.1rem;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            font-family: 'Lato', sans-serif;
+            transition: border-color 0.3s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #6ba3b8;
+        }
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .submit-button {
+            background: linear-gradient(135deg, #6ba3b8 0%, #5a7a8c 100%);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+        footer {
+            background: #5a7a8c;
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        /* Responsive Design for All Devices */
+       
+        /* Large Desktops (1920px and above) */
+        @media (min-width: 1920px) {
+            section {
+                max-width: 1600px;
+            }
+           
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+           
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+        /* Desktop (1200px - 1919px) */
+        @media (min-width: 1200px) and (max-width: 1919px) {
+            section {
+                max-width: 1140px;
+            }
+        }
+        /* Laptop (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            section {
+                max-width: 960px;
+                padding: 3rem 4%;
+            }
+           
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+           
+            nav {
+                gap: 1.5rem;
+            }
+           
+            nav a {
+                font-size: 0.95rem;
+            }
+        }
+        /* Tablet Landscape & Small Laptops (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            section {
+                padding: 3rem 4%;
+            }
+           
+            .hero {
+                height: 500px;
+            }
+           
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+           
+            .hero p {
+                font-size: 1.1rem;
+            }
+           
+            nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+           
+            nav a {
+                font-size: 0.9rem;
+            }
+           
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+           
+            .techniques-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+           
+            .approach-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+           
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+           
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+           
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+           
+            .modal-content {
+                width: 85%;
+                margin: 8% auto;
+            }
+           
+            .therapist-image {
+                width: 220px;
+                height: 220px;
+            }
+        }
+        /* Tablet Portrait (600px - 767px) */
+        @media (min-width: 600px) and (max-width: 767px) {
+            header {
+                padding: 1rem 3%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+           
+            .logo {
+                font-size: 1.3rem;
+            }
+           
+            nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                justify-content: center;
+            }
+           
+            nav a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.5rem;
+            }
+           
+            .lang-toggle {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+           
+            section {
+                padding: 2.5rem 4%;
+            }
+           
+            .hero {
+                height: auto;
+                padding: 2.5rem 1.5rem;
+            }
+           
+            .hero-content {
+                padding: 2rem;
+            }
+           
+            .hero h1 {
+                font-size: 2rem;
+            }
+           
+            .hero p {
+                font-size: 1rem;
+            }
+           
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+            }
+           
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+           
+            .about-content {
+                padding: 2rem;
+                font-size: 1rem;
+            }
+           
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+           
+            .service-card {
+                padding: 1.5rem;
+            }
+           
+            .service-icon {
+                font-size: 2.5rem;
+            }
+           
+            .techniques-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+           
+            .technique-card {
+                padding: 1.2rem;
+            }
+           
+            .approach-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+           
+            .approach-item {
+                padding: 1.5rem;
+            }
+           
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+           
+            .contact-container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+                gap: 2rem;
+            }
+           
+            .modal-content {
+                width: 90%;
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+           
+            .modal-title {
+                font-size: 1.5rem;
+            }
+           
+            .therapist-modal-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+           
+            .therapist-image {
+                width: 200px;
+                height: 200px;
+            }
+           
+            .therapist-name {
+                font-size: 1.7rem;
+            }
+           
+            footer {
+                padding: 1.5rem 4%;
+            }
+           
+            .footer-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* MOBILE FIX #1: Override sticky positioning on mobile devices to ensure header visibility */
+        @media (max-width: 599px) {
+            header {
+                position: relative;
+                top: auto;
+            }
+        }
+        
+        /* Mobile Landscape & Small Tablets (480px - 599px) */
+        @media (min-width: 480px) and (max-width: 599px) {
+            header {
+                padding: 0.8rem 3%;
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+           
+            .logo {
+                font-size: 1.2rem;
+            }
+           
+            nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                justify-content: center;
+            }
+           
+            nav a {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.4rem;
+            }
+           
+            .lang-toggle {
+                padding: 0.4rem 0.7rem;
+                font-size: 0.75rem;
+            }
+           
+            section {
+                padding: 2rem 3%;
+            }
+           
+            .hero {
+                height: auto;
+                padding: 2rem 1rem;
+            }
+           
+            .hero-content {
+                padding: 1.5rem;
+            }
+           
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+           
+            .hero p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+            }
+           
+            .cta-button {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+           
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 1.8rem;
+            }
+           
+            .about-content {
+                padding: 1.5rem;
+                font-size: 0.95rem;
+            }
+           
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.3rem;
+            }
+           
+            .service-card {
+                padding: 1.3rem;
+            }
+           
+            .service-icon {
+                font-size: 2.3rem;
+            }
+           
+            .service-card h3 {
+                font-size: 1.1rem;
+            }
+           
+            .techniques-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+           
+            .technique-card {
+                padding: 1rem;
+            }
+           
+            .technique-icon {
+                font-size: 2rem;
+            }
+           
+            .technique-card h3 {
+                font-size: 0.95rem;
+            }
+           
+            .approach-content {
+                grid-template-columns: 1fr;
+                gap: 1.3rem;
+            }
+           
+            .approach-item {
+                padding: 1.3rem;
+            }
+           
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+           
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+           
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+           
+            .blog-image {
+                height: 180px;
+            }
+           
+            .contact-container {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+           
+            .contact-form input,
+            .contact-form textarea {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+           
+            .modal-content {
+                width: 95%;
+                margin: 8% auto;
+                padding: 1.3rem;
+                max-height: 85vh;
+            }
+           
+            .modal-title {
+                font-size: 1.4rem;
+            }
+           
+            .modal-subtitle {
+                font-size: 0.95rem;
+            }
+           
+            .modal-icon {
+                font-size: 2.5rem;
+            }
+           
+            .therapist-modal-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+           
+            .therapist-image {
+                width: 180px;
+                height: 180px;
+            }
+           
+            .therapist-name {
+                font-size: 1.5rem;
+            }
+           
+            .therapist-credentials {
+                font-size: 0.95rem;
+            }
+           
+            footer {
+                padding: 1.3rem 3%;
+            }
+           
+            .footer-links {
+                flex-direction: column;
+                gap: 0.8rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* MOBILE FIX #2: Ensure proper z-index and prevent hero overlap on smallest screens */
+        @media (max-width: 479px) {
+            header {
+                position: relative;
+                z-index: 1000;
+            }
+            
+            .hero {
+                margin-top: 0;
+                min-height: auto;
+            }
+        }
+        
+        /* Mobile Portrait (320px - 479px) */
+        @media (max-width: 479px) {
+            header {
+                padding: 0.7rem 2%;
+                flex-direction: column;
+                gap: 0.7rem;
+            }
+           
+            .logo {
+                font-size: 1.1rem;
+            }
+           
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+           
+            nav a {
+                font-size: 0.85rem;
+                padding: 0.5rem;
+                display: block;
+                text-align: center;
+            }
+           
+            .lang-toggle {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+                width: 100%;
+            }
+           
+            section {
+                padding: 1.5rem 4%;
+            }
+           
+            .hero {
+                height: auto;
+                padding: 2rem 0.8rem;
+            }
+           
+            .hero-content {
+                padding: 1.5rem 1rem;
+            }
+           
+            .hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+           
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 1.2rem;
+            }
+           
+            .cta-button {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+                display: block;
+                margin: 0.4rem 0;
+            }
+           
+            .section-title {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+            }
+           
+            .about-content {
+                padding: 1.3rem;
+                font-size: 0.9rem;
+                line-height: 1.7;
+            }
+           
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+           
+            .service-card {
+                padding: 1.2rem;
+            }
+           
+            .service-icon {
+                font-size: 2.2rem;
+            }
+           
+            .service-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.7rem;
+            }
+           
+            .service-card p {
+                font-size: 0.9rem;
+            }
+           
+            .techniques-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+           
+            .technique-card {
+                padding: 1rem;
+            }
+           
+            .technique-icon {
+                font-size: 2rem;
+            }
+           
+            .technique-card h3 {
+                font-size: 0.95rem;
+            }
+           
+            .approach-content {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+           
+            .approach-item {
+                padding: 1.2rem;
+            }
+           
+            .approach-item h3 {
+                font-size: 1.1rem;
+            }
+           
+            .approach-item p {
+                font-size: 0.9rem;
+            }
+           
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.3rem;
+            }
+           
+            .testimonial-card {
+                padding: 1.3rem;
+                font-size: 0.9rem;
+            }
+           
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 1.3rem;
+            }
+           
+            .blog-image {
+                height: 160px;
+            }
+           
+            .blog-content {
+                padding: 1.2rem;
+            }
+           
+            .blog-card h3 {
+                font-size: 1rem;
+                margin-bottom: 0.7rem;
+            }
+           
+            .blog-card p {
+                font-size: 0.85rem;
+            }
+           
+            .contact-container {
+                grid-template-columns: 1fr;
+                padding: 1.3rem;
+                gap: 1.3rem;
+            }
+           
+            .contact-item strong {
+                font-size: 1rem;
+            }
+           
+            .contact-item span {
+                font-size: 0.9rem;
+            }
+           
+            .contact-form input,
+            .contact-form textarea {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+           
+            .contact-form textarea {
+                min-height: 120px;
+            }
+           
+            .submit-button {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+           
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 1rem;
+                max-height: 90vh;
+            }
+           
+            .close {
+                font-size: 24px;
+            }
+           
+            .modal-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+                padding-bottom: 0.8rem;
+            }
+           
+            .modal-icon {
+                font-size: 2.2rem;
+            }
+           
+            .modal-title {
+                font-size: 1.2rem;
+            }
+           
+            .modal-subtitle {
+                font-size: 0.85rem;
+            }
+           
+            .modal-body {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+           
+            .modal-body p {
+                margin-bottom: 0.8rem;
+            }
+           
+            .modal-body ul {
+                margin: 0.8rem 0 0.8rem 1.2rem;
+            }
+           
+            .modal-body li {
+                margin-bottom: 0.4rem;
+                font-size: 0.85rem;
+            }
+           
+            .modal-summary {
+                padding: 1rem;
+                margin-top: 1rem;
+                font-size: 0.9rem;
+            }
+           
+            .therapist-modal-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+            }
+           
+            .therapist-image {
+                width: 150px;
+                height: 150px;
+            }
+           
+            .therapist-name {
+                font-size: 1.3rem;
+                margin-bottom: 0.7rem;
+            }
+           
+            .therapist-credentials {
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
+            }
+           
+            footer {
+                padding: 1.2rem 4%;
+                font-size: 0.85rem;
+            }
+           
+            .footer-links {
+                flex-direction: column;
+                gap: 0.7rem;
+                margin-bottom: 0.8rem;
+            }
+           
+            .footer-links a {
+                font-size: 0.85rem;
+            }
+        }
+        /* Extra Small Devices (Less than 320px) */
+        @media (max-width: 319px) {
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+           
+            .section-title {
+                font-size: 1.4rem;
+            }
+           
+            .modal-content {
+                width: 98%;
+                padding: 0.8rem;
+            }
+           
+            .therapist-image {
+                width: 130px;
+                height: 130px;
+            }
+        }
+        /* Landscape Orientation Adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+            }
+           
+            .modal-content {
+                margin: 2% auto;
+                max-height: 95vh;
+            }
+        }
+        /* High DPI Displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+        /* Print Styles */
+        @media print {
+            header {
+                position: relative;
+            }
+           
+            .modal {
+                display: none !important;
+            }
+           
+            .lang-toggle {
+                display: none;
+            }
+           
+            .cta-button {
+                border: 2px solid #5a7a8c;
+                color: #5a7a8c;
+            }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Mi Naturaleza Sutil</div>
+        <nav>
+            <a href="#home" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#about" data-es="Nosotros" data-en="About">Nosotros</a>
+            <a href="#services" data-es="Servicios" data-en="Services">Servicios</a>
+            <a href="#techniques" data-es="Técnicas" data-en="Techniques">Técnicas</a>
+            <a href="#" onclick="openTherapistModal(); return false;" data-es="Terapeuta" data-en="Therapist">Terapeuta</a>
+            <a href="#approach" data-es="Enfoque" data-en="Approach">Enfoque</a>
+            <a href="#blog" data-es="Blog" data-en="Blog">Blog</a>
+            <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+            <button class="lang-toggle" onclick="toggleLanguage()">English</button>
+        </nav>
+    </header>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 data-es="Bienvenido a Mi Naturaleza Sutil" data-en="Welcome to Mi Naturaleza Sutil (MNS)">Bienvenido a Tu Naturaleza Sutil</h1>
+            <p data-es="Centro de ayuda enfocado en tu salud emocional" data-en="Help center focused on your emotional health">Centro de ayuda enfocado en tu salud emocional</p>
+            <a href="#contact" class="cta-button" data-es="Agenda tu Sesión" data-en="Book Your Session">Agenda tu Sesión</a>
+            <a href="#about" class="cta-button" data-es="Conoce Más" data-en="Learn More">Conoce Más</a>
+        </div>
+    </section>
+    <section id="about">
+        <h2 class="section-title" data-es="Sobre Nosotros" data-en="About Us">Sobre Nosotros</h2>
+        <div class="about-content">
+            <p data-es="En mi naturaleza sutil somos un centro de ayuda donde nos enfocamos en la salud emocional del ser humano. Te enseñamos paso a paso a manejar emociones como el estrés, depresión, ansiedad, baja auto estima entre muchas otras. Somos un equipo de trabajo que nos seguimos formando día con día con la finalidad de conseguir el mejor resultado para la necesidad de cada persona. Adaptamos las sesiones a la situación de cada persona con la finalidad de conseguir una alineación emocional perdurable o definitiva, regresando a nuestra naturaleza sutil y en armonía con la vida."
+               data-en="At My Subtle Nature, we are a help center focused on human emotional health. We teach you step by step to manage emotions such as stress, depression, anxiety, low self-esteem, among many others. We are a working team that continues to train every day in order to achieve the best result for each person's needs. We adapt sessions to each person's situation in order to achieve lasting or definitive emotional alignment, returning to our subtle nature and in harmony with life.">
+                En mi naturaleza sutil somos un centro de ayuda donde nos enfocamos en la salud emocional del ser humano. Te enseñamos paso a paso a manejar emociones como el estrés, depresión, ansiedad, baja auto estima entre muchas otras. Somos un equipo de trabajo que nos seguimos formando día con día con la finalidad de conseguir el mejor resultado para la necesidad de cada persona. Adaptamos las sesiones a la situación de cada persona con la finalidad de conseguir una alineación emocional perdurable o definitiva, regresando a nuestra naturaleza sutil y en armonía con la vida.
+            </p>
+        </div>
+    </section>
+    <section id="services">
+        <h2 class="section-title" data-es="Nuestros Servicios" data-en="Our Services">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">😰</div>
+                <h3 data-es="Fobias y Miedos" data-en="Phobias and Fears">Fobias y Miedos</h3>
+                <p data-es="Apoyo para superar fobias y miedos que limitan tu vida" data-en="Support to overcome phobias and fears that limit your life">Apoyo para superar fobias y miedos que limitan tu vida</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">😓</div>
+                <h3 data-es="Estrés Crónico" data-en="Chronic Stress">Estrés Crónico</h3>
+                <p data-es="Técnicas para manejar el estrés prolongado y recurrente" data-en="Techniques to manage prolonged and recurring stress">Técnicas para manejar el estrés prolongado y recurrente</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚭</div>
+                <h3 data-es="Adicciones" data-en="Addictions">Adicciones</h3>
+                <p data-es="Apoyo para superar adicciones a drogas, tabaco, videojuegos y redes sociales" data-en="Support to overcome addictions to drugs, tobacco, video games and social media">Apoyo para superar adicciones a drogas, tabaco, videojuegos y redes sociales</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌧️</div>
+                <h3 data-es="Depresión" data-en="Depression">Depresión</h3>
+                <p data-es="Acompañamiento profesional para superar momentos difíciles" data-en="Professional support to overcome difficult times">Acompañamiento profesional para superar momentos difíciles</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚖️</div>
+                <h3 data-es="Manejo de Peso" data-en="Weight Management">Manejo de Peso</h3>
+                <p data-es="Apoyo emocional para alcanzar tus objetivos de salud" data-en="Emotional support to achieve your health goals">Apoyo emocional para alcanzar tus objetivos de salud</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🩹</div>
+                <h3 data-es="Dolor Crónico" data-en="Pain and Chronic Pain">Dolor Crónico</h3>
+                <p data-es="Técnicas para el manejo del dolor persistente" data-en="Techniques for managing persistent pain">Técnicas para el manejo del dolor persistente</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">😴</div>
+                <h3 data-es="Insomnio" data-en="Insomnia">Insomnio</h3>
+                <p data-es="Ayuda para recuperar un sueño reparador" data-en="Help to recover restorative sleep">Ayuda para recuperar un sueño reparador</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3 data-es="Autoestima y Confianza" data-en="Self-Esteem and Confidence">Autoestima y Confianza</h3>
+                <p data-es="Fortalece tu amor propio y confianza personal" data-en="Strengthen your self-love and personal confidence">Fortalece tu amor propio y confianza personal</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">😤</div>
+                <h3 data-es="Manejo de la Ira" data-en="Anger Management">Manejo de la Ira</h3>
+                <p data-es="Aprende a gestionar y expresar la ira de forma saludable" data-en="Learn to manage and express anger in a healthy way">Aprende a gestionar y expresar la ira de forma saludable</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔄</div>
+                <h3 data-es="Cambios de Conducta y Hábitos" data-en="Behavioral and Habit Changes">Cambios de Conducta y Hábitos</h3>
+                <p data-es="Transformación de patrones de comportamiento" data-en="Transformation of behavioral patterns">Transformación de patrones de comportamiento</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌱</div>
+                <h3 data-es="Crecimiento Personal y Profesional" data-en="Personal and Professional Growth">Crecimiento Personal y Profesional</h3>
+                <p data-es="Desarrollo integral para alcanzar tu máximo potencial" data-en="Comprehensive development to reach your maximum potential">Desarrollo integral para alcanzar tu máximo potencial</p>
+            </div>
+        </div>
+    </section>
+    <section id="techniques">
+        <h2 class="section-title" data-es="Nuestras Técnicas" data-en="Our Techniques">Nuestras Técnicas</h2>
+        <div class="techniques-grid">
+            <div class="technique-card" onclick="openModal('hypnotherapy')">
+                <div class="technique-icon">🌙</div>
+                <h3 data-es="Hipnoterapia" data-en="Hypnotherapy">Hipnoterapia</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('logotherapy')">
+                <div class="technique-icon">✨</div>
+                <h3 data-es="Logoterapia" data-en="Logotherapy">Logoterapia</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('thanatology')">
+                <div class="technique-icon">🌙</div>
+                <h3 data-es="Tanatología" data-en="Thanatology">Tanatología</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('mtv')">
+                <div class="technique-icon">👁️</div>
+                <h3 data-es="Mejora Tu Visión (MTV)" data-en="Improve Your Vision (MTV)">Mejora Tu Visión (MTV)</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('ves')">
+                <div class="technique-icon">🌌</div>
+                <h3 data-es="Visión Etérea Sutil (VES)" data-en="Subtle Ethereal Vision (VES)">Visión Etérea Sutil (VES)</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('pastlives')">
+                <div class="technique-icon">🔮</div>
+                <h3 data-es="Vidas Pasadas (PS)" data-en="Past Lives Exploration (PS)">Vidas Pasadas (PS)</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('energytherapy')">
+                <div class="technique-icon">✨</div>
+                <h3 data-es="Terapia Energética (TE)" data-en="Energy Therapy (TE)">Terapia Energética (TE)</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('reiki')">
+                <div class="technique-icon">✨</div>
+                <h3>Reiki</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('dreams')">
+                <div class="technique-icon">🌙</div>
+                <h3 data-es="Interpretación de Sueños (IDS)" data-en="Dream Interpretation (IDS)">Interpretación de Sueños (IDS)</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('radiesthesia')">
+                <div class="technique-icon">🔮</div>
+                <h3 data-es="Péndulo y Varillas (Radiestesia)" data-en="Pendulum and Dowsing Rods (Radiesthesia)">Péndulo y Varillas (Radiestesia)</h3>
+            </div>
+            <div class="technique-card" onclick="openModal('intuition')">
+                <div class="technique-icon">✨</div>
+                <h3 data-es="Despierta Tu Intuición" data-en="Awaken Your Intuition">Despierta Tu Intuición</h3>
+            </div>
+        </div>
+    </section>
+    <div id="techniqueModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    <section id="approach">
+        <h2 class="section-title" data-es="Nuestro Enfoque" data-en="Our Approach">Nuestro Enfoque</h2>
+        <div class="approach-content">
+            <div class="approach-item">
+                <h3 data-es="Personalizado" data-en="Personalized">Personalizado</h3>
+                <p data-es="Cada sesión se adapta a tus necesidades específicas" data-en="Each session adapts to your specific needs">Cada sesión se adapta a tus necesidades específicas</p>
+            </div>
+            <div class="approach-item">
+                <h3 data-es="Profesional" data-en="Professional">Profesional</h3>
+                <p data-es="Equipo en constante formación y actualización" data-en="Team in constant training and updating">Equipo en constante formación y actualización</p>
+            </div>
+            <div class="approach-item">
+                <h3 data-es="Holístico" data-en="Holistic">Holístico</h3>
+                <p data-es="Tratamiento integral de mente, cuerpo y espíritu" data-en="Comprehensive treatment of mind, body and spirit">Tratamiento integral de mente, cuerpo y espíritu</p>
+            </div>
+            <div class="approach-item">
+                <h3 data-es="Compasivo" data-en="Compassionate">Compasivo</h3>
+                <p data-es="Ambiente seguro y de apoyo incondicional" data-en="Safe environment with unconditional support">Ambiente seguro y de apoyo incondicional</p>
+            </div>
+        </div>
+    </section>
+    <section id="testimonials">
+        <h2 class="section-title" data-es="Testimonios" data-en="Testimonials">Testimonios</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p data-es="Las sesiones me han ayudado enormemente a manejar mi ansiedad. Me siento más tranquila y en control de mis emociones." data-en="The sessions have helped me enormously to manage my anxiety. I feel calmer and in control of my emotions.">Las sesiones me han ayudado enormemente a manejar mi ansiedad. Me siento más tranquila y en control de mis emociones.</p>
+                <p class="testimonial-author">- María G.</p>
+            </div>
+            <div class="testimonial-card">
+                <p data-es="El enfoque personalizado hizo toda la diferencia. Finalmente encontré el apoyo que necesitaba." data-en="The personalized approach made all the difference. I finally found the support I needed.">El enfoque personalizado hizo toda la diferencia. Finalmente encontré el apoyo que necesitaba.</p>
+                <p class="testimonial-author">- Carlos R.</p>
+            </div>
+            <div class="testimonial-card">
+                <p data-es="Profesionales comprometidos y compasivos. Recomiendo ampliamente sus servicios." data-en="Committed and compassionate professionals. I highly recommend their services.">Profesionales comprometidos y compasivos. Recomiendo ampliamente sus servicios.</p>
+                <p class="testimonial-author">- Ana L.</p>
+            </div>
+        </div>
+    </section>
+    <section id="blog">
+        <h2 class="section-title" data-es="Blog Reciente" data-en="Recent Blog">Blog Reciente</h2>
+        <div class="blog-grid">
+            <div class="blog-card" onclick="openBlogModal('breathing')">
+                <div class="blog-image" style="background: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800') center/cover;"></div>
+                <div class="blog-content">
+                    <h3 data-es="Técnicas de Respiración para la Ansiedad" data-en="Breathing Techniques for Anxiety">Técnicas de Respiración para la Ansiedad</h3>
+                    <p data-es="Descubre métodos simples para calmar tu mente en momentos difíciles." data-en="Discover simple methods to calm your mind in difficult moments.">Descubre métodos simples para calmar tu mente en momentos difíciles.</p>
+                </div>
+            </div>
+            <div class="blog-card" onclick="openBlogModal('selfcare')">
+                <div class="blog-image" style="background: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800') center/cover;"></div>
+                <div class="blog-content">
+                    <h3 data-es="La Importancia del Autocuidado" data-en="The Importance of Self-Care">La Importancia del Autocuidado</h3>
+                    <p data-es="Por qué cuidar de ti mismo no es egoísta sino necesario." data-en="Why taking care of yourself is not selfish but necessary.">Por qué cuidar de ti mismo no es egoísta sino necesario.</p>
+                </div>
+            </div>
+            <div class="blog-card" onclick="openBlogModal('resilience')">
+                <div class="blog-image" style="background: url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800') center/cover;"></div>
+                <div class="blog-content">
+                    <h3 data-es="Construyendo Resiliencia Emocional" data-en="Building Emotional Resilience">Construyendo Resiliencia Emocional</h3>
+                    <p data-es="Herramientas para fortalecerte ante los desafíos de la vida." data-en="Tools to strengthen yourself in the face of life's challenges.">Herramientas para fortalecerte ante los desafíos de la vida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBlogModal()">&times;</span>
+            <div id="blogModalBody"></div>
+        </div>
+    </div>
+    <div id="therapistModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTherapistModal()">&times;</span>
+            <div id="therapistModalBody"></div>
+        </div>
+    </div>
+    <section id="contact">
+        <h2 class="section-title" data-es="Contacto" data-en="Contact">Contacto</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong data-es="Terapeuta:" data-en="Therapist:">Terapeuta:</strong>
+                    <span><a href="https://www.facebook.com/enconfianzaconyeanin/">Yeanin Ruvalcaba</a></span>
+                </div>
+                <div class="contact-item">
+                    <strong data-es="Celular:" data-en="Phone:">Celular:</strong>
+                    <span>(562) 474-2818</span>
+                </div>
+                <div class="contact-item">
+                    <strong data-es="Correo Electrónico:" data-en="Email:">Correo Electrónico:</strong>
+                    <span>minaturalezasutil@gmail.com</span>
+                </div>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Nombre / Name" required>
+                <input type="email" placeholder="Correo / Email" required>
+                <textarea placeholder="Mensaje / Message" required></textarea>
+                <button type="submit" class="submit-button" data-es="Enviar Mensaje" data-en="Send Message">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-links">
+            <a href="#home" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#about" data-es="Nosotros" data-en="About">Nosotros</a>
+            <a href="#services" data-es="Servicios" data-en="Services">Servicios</a>
+            <a href="#contact" data-es="Contacto" data-en="Contact">Contacto</a>
+        </div>
+        <p data-es="© 2026 Mi Naturaleza Sutil. Todos los derechos reservados." data-en="© 2026 My Subtle Nature. All rights reserved.">© 2026 Mi Naturaleza Sutil. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        let currentLang = 'es';
+        const techniqueData = {
+            hypnotherapy: {
+                icon: '🌙',
+                title: { es: 'Hipnoterapia', en: 'Hypnotherapy' },
+                subtitle: { es: 'Sanación a través de la relajación consciente y la transformación subconsciente', en: 'Healing through conscious relaxation and subconscious transformation' },
+                content: {
+                    es: '<p>La Hipnoterapia es un proceso terapéutico que utiliza estados de relajación consciente guiada para acceder a capas más profundas de la mente y promover la sanación desde su raíz. Puede apoyar a las personas en el trabajo con fobias, miedos, estrés crónico, adicciones (como drogas, tabaco, videojuegos y redes sociales), depresión, manejo de peso, control del dolor, insomnio, desafíos de autoestima, manejo de la ira, cambios de comportamiento y hábitos, y desarrollo personal o profesional.</p><p>Dentro de este espacio terapéutico seguro y enfocado, la persona permanece en pleno control mientras se vuelve más abierta a transformar creencias, emociones y patrones de comportamiento que influyen en la vida diaria.</p><p><strong>Beneficios del proceso:</strong></p><ul><li>Libera bloqueos emocionales almacenados en el subconsciente</li><li>Ayuda a reprogramar creencias limitantes y patrones de comportamiento repetitivos</li><li>Facilita la regulación emocional y la claridad mental</li><li>Activa recursos internos que pueden permanecer inactivos</li><li>Fortalece la autoconfianza, la intuición y la capacidad de crear cambios duraderos</li></ul><div class="modal-summary"><strong>Resumen:</strong> La Hipnoterapia ofrece un viaje interno suave pero profundamente transformador que permite a las personas reinterpretar experiencias pasadas, sanar a nivel raíz y desarrollar nuevas posibilidades internas.</div>',
+                    en: '<p>Hypnotherapy is a therapeutic process that uses guided states of conscious relaxation to access deeper layers of the mind and promote healing at its root. It can support individuals in working through phobias, fears, chronic stress, addictions (such as drugs, tobacco, video games, and social media), depression, weight management, pain control, insomnia, self-esteem challenges, anger management, behavioral and habit changes, and personal or professional development.</p><p>Within this safe and focused therapeutic space, the individual remains fully in control while becoming more open to transforming beliefs, emotions, and behavioral patterns that influence daily life.</p><p><strong>Benefits of the process:</strong></p><ul><li>Releases emotional blockages stored in the subconscious</li><li>Helps reprogram limiting beliefs and repetitive behavioral patterns</li><li>Facilitates emotional regulation and mental clarity</li><li>Activates internal resources that may remain dormant</li><li>Strengthens self-confidence, intuition, and the ability to create lasting change</li></ul><div class="modal-summary"><strong>Summary:</strong> Hypnotherapy offers a gentle yet deeply transformative inner journey that allows individuals to reinterpret past experiences, heal at the root level, and develop new internal possibilities.</div>'
+                }
+            },
+            logotherapy: {
+                icon: '✨',
+                title: { es: 'Logoterapia', en: 'Logotherapy' },
+                subtitle: { es: 'Sanación a través del significado y el propósito', en: 'Healing through meaning and purpose' },
+                content: {
+                    es: '<p>La Logoterapia es un enfoque terapéutico centrado en la capacidad humana de encontrar significado, incluso durante los momentos más difíciles de la vida. Desarrollada a partir del trabajo de Viktor Frankl, esta terapia ayuda a las personas a descubrir propósito, dirección y significado personal, que son esenciales para el bienestar emocional y espiritual.</p><div class="modal-summary"><strong>Resumen:</strong> La Logoterapia ayuda a las personas a reconectar con el propósito de su vida, transformar el sufrimiento en crecimiento personal y fortalecer la resiliencia.</div>',
+                    en: '<p>Logotherapy is a therapeutic approach focused on the human ability to find meaning, even during life\'s most difficult moments. Developed from the work of Viktor Frankl, this therapy helps individuals discover purpose, direction, and personal significance.</p><div class="modal-summary"><strong>Summary:</strong> Logotherapy helps people reconnect with their life purpose, transform suffering into personal growth, and strengthen resilience.</div>'
+                }
+            },
+            thanatology: {
+                icon: '🌙',
+                title: { es: 'Tanatología', en: 'Thanatology' },
+                subtitle: { es: 'Apoyo emocional durante la pérdida y la transformación', en: 'Emotional support during loss and transformation' },
+                content: {
+                    es: '<p>La Tanatología proporciona apoyo terapéutico durante experiencias de duelo, pérdida o transiciones vitales. Ofrece un espacio compasivo y seguro para procesar emociones, comprender el cambio y atravesar finales difíciles de manera respetuosa y consciente.</p><div class="modal-summary"><strong>Resumen:</strong> La Tanatología ayuda a las personas a procesar el duelo, honrar la pérdida con significado y encontrar claridad emocional.</div>',
+                    en: '<p>Thanatology provides therapeutic support during experiences of grief, loss, or life transitions. It offers a compassionate and safe space to process emotions, understand change, and move through difficult endings respectfully and consciously.</p><div class="modal-summary"><strong>Summary:</strong> Thanatology helps individuals process grief, honor loss with meaning, and find emotional clarity.</div>'
+                }
+            },
+            mtv: {
+                icon: '👁️',
+                title: { es: 'Mejora Tu Visión (MTV)', en: 'Improve Your Vision (MTV)' },
+                subtitle: { es: 'Reentrena tus ojos y restaura la visión natural', en: 'Retrain your eyes and restore natural vision' },
+                content: {
+                    es: '<p>Este proceso terapéutico y educativo ayuda a las personas a reconectar con su capacidad natural de ver con claridad. A través de ejercicios visuales, conciencia corporal, relajación ocular y reprogramación de hábitos, ayuda a liberar la tensión y mejorar la flexibilidad y coordinación visual.</p><div class="modal-summary"><strong>Resumen:</strong> MTV se enfoca en mejorar la claridad visual de forma natural mediante el reentrenamiento de los hábitos oculares.</div>',
+                    en: '<p>This therapeutic and educational process helps individuals reconnect with their natural ability to see clearly. Through visual exercises, body awareness, eye relaxation, and habit reprogramming, it helps release tension and improve visual flexibility.</p><div class="modal-summary"><strong>Summary:</strong> MTV focuses on improving visual clarity naturally by retraining eye habits and reducing strain.</div>'
+                }
+            },
+            ves: {
+                icon: '🌌',
+                title: { es: 'Visión Etérea Sutil (VES)', en: 'Subtle Ethereal Vision (VES)' },
+                subtitle: { es: 'Percepción expandida más allá de la vista física', en: 'Expanded perception beyond physical sight' },
+                content: {
+                    es: '<p>VES es una práctica de percepción que explora la idea de que la visión no es solo biológica, sino también intuitiva, energética y simbólica. A través de ejercicios guiados y conciencia plena, las personas aprenden a acceder a una percepción sensorial más profunda.</p><div class="modal-summary"><strong>Resumen:</strong> VES expande la conciencia fortaleciendo la percepción intuitiva y ayudando a las personas a conectarse con formas simbólicas y energéticas de visión.</div>',
+                    en: '<p>VES is a perception practice exploring the idea that vision is not only biological but also intuitive, energetic, and symbolic. Through guided exercises and mindful awareness, individuals learn to access deeper sensory perception.</p><div class="modal-summary"><strong>Summary:</strong> VES expands awareness by strengthening intuitive perception and helping individuals connect with symbolic and energetic forms of vision.</div>'
+                }
+            },
+            pastlives: {
+                icon: '🔮',
+                title: { es: 'Exploración de Vidas Pasadas (PS)', en: 'Past Lives Exploration (PS)' },
+                subtitle: { es: 'Exploración simbólica de memorias profundas del alma', en: 'Symbolic exploration of deep soul memories' },
+                content: {
+                    es: '<p>Este proceso terapéutico utiliza técnicas de relajación profunda para acceder a memorias simbólicas que pueden influir en los patrones emocionales y relaciones actuales. El objetivo es comprender patrones emocionales internos y la sabiduría subconsciente.</p><div class="modal-summary"><strong>Resumen:</strong> La Exploración de Vidas Pasadas ayuda a revelar patrones emocionales repetitivos y obtener claridad sobre experiencias de vida.</div>',
+                    en: '<p>This therapeutic process uses deep relaxation techniques to access symbolic memories that may influence current emotional patterns and relationships. The goal is understanding inner emotional patterns and subconscious wisdom.</p><div class="modal-summary"><strong>Summary:</strong> Past Lives Exploration helps reveal repeating emotional patterns and gain clarity about life experiences.</div>'
+                }
+            },
+            energytherapy: {
+                icon: '✨',
+                title: { es: 'Terapia Energética (TE)', en: 'Energy Therapy (TE)' },
+                subtitle: { es: 'Armonización profunda del campo emocional y energético', en: 'Deep emotional and energetic field harmonization' },
+                content: {
+                    es: '<p>La Terapia Energética trabaja con el campo energético sutil de una persona para liberar bloqueos, equilibrar emociones y restaurar la vitalidad. Utiliza técnicas de percepción energética y presencia consciente.</p><div class="modal-summary"><strong>Resumen:</strong> La Terapia Energética se enfoca en limpiar bloqueos energéticos y restaurar el equilibrio entre mente, cuerpo y energía.</div>',
+                    en: '<p>Energy Therapy works with a person\'s subtle energetic field to release blockages, balance emotions, and restore vitality. It uses energy perception techniques and mindful presence.</p><div class="modal-summary"><strong>Summary:</strong> Energy Therapy focuses on clearing energetic blockages and restoring balance between mind, body, and energy.</div>'
+                }
+            },
+            reiki: {
+                icon: '✨',
+                title: { es: 'Reiki', en: 'Reiki' },
+                subtitle: { es: 'Sanación con energía vital universal', en: 'Universal life energy healing' },
+                content: {
+                    es: '<p>Reiki es una técnica de sanación energética que canaliza la energía vital universal a través de la colocación suave de las manos. Promueve la relajación, el equilibrio emocional y el bienestar general.</p><div class="modal-summary"><strong>Resumen:</strong> Reiki apoya la reducción del estrés, la sanación emocional y la restauración del equilibrio interno.</div>',
+                    en: '<p>Reiki is an energy healing technique that channels universal life energy through gentle hand placement. It promotes relaxation, emotional balance, and overall well-being.</p><div class="modal-summary"><strong>Summary:</strong> Reiki supports stress reduction, emotional healing, and restoration of internal balance.</div>'
+                }
+            },
+            dreams: {
+                icon: '🌙',
+                title: { es: 'Interpretación de Sueños (IDS)', en: 'Dream Interpretation (IDS)' },
+                subtitle: { es: 'Comprender el lenguaje simbólico del inconsciente', en: 'Understanding the symbolic language of the unconscious' },
+                content: {
+                    es: '<p>La Interpretación de Sueños ayuda a las personas a comprender símbolos, emociones y mensajes que aparecen en los sueños. Conecta la conciencia con los procesos subconscientes.</p><div class="modal-summary"><strong>Resumen:</strong> La Interpretación de Sueños proporciona información sobre mensajes subconscientes y patrones emocionales.</div>',
+                    en: '<p>Dream Interpretation helps individuals understand symbols, emotions, and messages appearing in dreams. It connects conscious awareness with subconscious processes.</p><div class="modal-summary"><strong>Summary:</strong> Dream Interpretation provides insight into subconscious messages and emotional patterns.</div>'
+                }
+            },
+            radiesthesia: {
+                icon: '🔮',
+                title: { es: 'Péndulo y Varillas (Radiestesia)', en: 'Pendulum and Dowsing Rods (Radiesthesia)' },
+                subtitle: { es: 'Lectura sutil de campos energéticos', en: 'Subtle reading of energetic fields' },
+                content: {
+                    es: '<p>Esta técnica utiliza péndulos y varillas para detectar movimientos energéticos, bloqueos y desequilibrios dentro del campo energético de una persona.</p><div class="modal-summary"><strong>Resumen:</strong> La Radiestesia ayuda a identificar desequilibrios energéticos y patrones emocionales.</div>',
+                    en: '<p>This technique uses pendulums and dowsing rods to detect energetic movements, blockages, and imbalances within a person\'s energy field.</p><div class="modal-summary"><strong>Summary:</strong> Radiesthesia helps identify energetic imbalances and emotional patterns.</div>'
+                }
+            },
+            intuition: {
+                icon: '✨',
+                title: { es: 'Despierta Tu Intuición', en: 'Awaken Your Intuition' },
+                subtitle: { es: 'Reconecta con la guía interna y la percepción profunda', en: 'Reconnect with inner guidance and deep perception' },
+                content: {
+                    es: '<p>Este proceso terapéutico ayuda a las personas a fortalecer sus habilidades intuitivas naturales a través de ejercicios guiados y prácticas de conciencia plena.</p><div class="modal-summary"><strong>Resumen:</strong> Despierta Tu Intuición fortalece la percepción interna y la confianza en la toma de decisiones.</div>',
+                    en: '<p>This therapeutic process helps individuals strengthen their natural intuitive abilities through guided exercises and mindful awareness practices.</p><div class="modal-summary"><strong>Summary:</strong> Awaken Your Intuition strengthens inner perception and confidence in decision-making.</div>'
+                }
+            }
+        };
+        const blogData = {
+            breathing: {
+                icon: '🌿',
+                title: { es: 'Técnicas de Respiración para la Ansiedad', en: 'Breathing Techniques for Anxiety' },
+                content: {
+                    es: '<p>La ansiedad puede aparecer repentinamente y hacer que incluso los momentos simples se sientan abrumadores. Una de las formas más efectivas y naturales de recuperar la calma es a través de la respiración consciente.</p><p>Una técnica simple es la respiración diafragmática profunda. Esto implica inhalar lentamente por la nariz, permitiendo que el abdomen se expanda, sostener la respiración brevemente y exhalar suavemente por la boca.</p><p>Otro método efectivo es la respiración en caja, que consiste en inhalar durante cuatro segundos, sostener durante cuatro segundos, exhalar durante cuatro segundos y hacer una pausa nuevamente durante cuatro segundos antes de repetir.</p><p>Nuestros servicios están diseñados para apoyar el equilibrio emocional, reducir el estrés y promover el bienestar.</p>',
+                    en: '<p>Anxiety can appear suddenly and make even simple moments feel overwhelming. One of the most effective and natural ways to regain calm is through conscious breathing.</p><p>One simple technique is deep diaphragmatic breathing. This involves inhaling slowly through the nose, allowing the abdomen to expand, holding the breath briefly, and exhaling gently through the mouth.</p><p>Another effective method is box breathing, which consists of inhaling for four seconds, holding for four seconds, exhaling for four seconds, and pausing again for four seconds before repeating.</p><p>Our services are designed to support emotional balance, reduce stress, and promote well-being.</p>'
+                }
+            },
+            selfcare: {
+                icon: '🌸',
+                title: { es: 'La Importancia del Autocuidado', en: 'The Importance of Self-Care' },
+                content: {
+                    es: '<p>El autocuidado a menudo se malinterpreta como algo indulgente o innecesario. En realidad, cuidar de uno mismo es esencial para mantener la salud emocional, física y mental.</p><p>El autocuidado implica prácticas diarias simples como establecer límites saludables, descansar lo suficiente y mantener una nutrición equilibrada.</p><p>Cuando las personas priorizan el autocuidado, se vuelven más disponibles emocionalmente, pacientes y presentes con sus seres queridos.</p><p>Nuestros servicios terapéuticos proporcionan herramientas de apoyo que fomentan el autocuidado y la sanación emocional.</p>',
+                    en: '<p>Self-care is often misunderstood as something indulgent or unnecessary. In reality, taking care of yourself is essential for maintaining emotional, physical, and mental health.</p><p>Self-care involves simple daily practices such as setting healthy boundaries, getting enough rest, and maintaining balanced nutrition.</p><p>When people prioritize self-care, they become more emotionally available, patient, and present with their loved ones.</p><p>Our therapeutic services provide supportive tools that encourage self-care and emotional healing.</p>'
+                }
+            },
+            resilience: {
+                icon: '🌱',
+                title: { es: 'Construyendo Resiliencia Emocional', en: 'Building Emotional Resilience' },
+                content: {
+                    es: '<p>La vida naturalmente presenta desafíos, cambios y dificultades inesperadas. La resiliencia emocional es la capacidad de adaptarse, recuperarse y fortalecerse a través de estas experiencias.</p><p>La resiliencia puede fortalecerse a través de varias herramientas, incluida la conciencia emocional, el desarrollo de una mentalidad positiva y técnicas de relajación.</p><p>Practicar la atención plena, mantener relaciones de apoyo y participar en actividades de crecimiento personal también contribuyen a la fortaleza emocional.</p><p>Nuestros servicios están diseñados para apoyar la resiliencia emocional ayudando a las personas a liberar bloqueos internos y desarrollar patrones emocionales más saludables.</p>',
+                    en: '<p>Life naturally presents challenges, changes, and unexpected difficulties. Emotional resilience is the ability to adapt, recover, and grow stronger through these experiences.</p><p>Resilience can be strengthened through several tools, including emotional awareness, positive mindset development, and relaxation techniques.</p><p>Practicing mindfulness, maintaining supportive relationships, and engaging in personal growth activities also contribute to long-term emotional strength.</p><p>Our services are designed to support emotional resilience by helping individuals release internal blockages and develop healthier emotional patterns.</p>'
+                }
+            }
+        };
+        const therapistData = {
+            name: 'Yeanin Ruvalcaba',
+            image: 'therapist-photo.jpg',
+            title: { es: 'Conoce a Yeanin Ruvalcaba', en: 'Meet Yeanin Ruvalcaba' },
+            credentials: { es: 'Hipnoterapeuta, Logoterapeuta, Tanatóloga y Practicante de Terapias Holísticas', en: 'Hypnotherapist, Logotherapist, Thanatologist, and Holistic Therapies Practitioner' },
+            intro: {
+                es: 'Yeanin Ruvalcaba es una terapeuta compasiva y experimentada dedicada a ayudar a las personas a navegar los desafíos emocionales de la vida. Con 7 años de experiencia como Hipnoterapeuta, Logoterapeuta, Tanatóloga y practicante de Terapias Holísticas, incluidas técnicas de visión extrasensorial, ofrece un enfoque integral y personalizado para la sanación.\n\nYeanin apoya a clientes que enfrentan ansiedad, depresión, estrés, insomnio, baja autoestima, trauma, miedos, fobias y muchas otras luchas emocionales. Su estilo cálido y empático asegura que cada persona se sienta comprendida, empoderada y guiada hacia un cambio positivo.\n\nYa sea que busques perspicacia, alivio o crecimiento personal, Yeanin combina habilidad profesional con cuidado genuino para ayudarte a avanzar con confianza y equilibrio.',
+                en: 'Yeanin Ruvalcaba is a compassionate and experienced therapist dedicated to helping individuals navigate life\'s emotional challenges. With 7 years of expertise as a Hypnotherapist, Logotherapist, Thanatologist, and practitioner of Holistic Therapies—including extrasensory vision techniques—she offers a comprehensive and personalized approach to healing.\n\nYeanin supports clients dealing with anxiety, depression, stress, insomnia, low self-esteem, trauma, fears, phobias, and many other emotional struggles. Her warm, empathetic style ensures that each person feels understood, empowered, and guided toward positive change.\n\nWhether you\'re seeking insight, relief, or personal growth, Yeanin combines professional skill with genuine care to help you move forward with confidence and balance.'
+            }
+        };
+        function openModal(technique) {
+            const modal = document.getElementById('techniqueModal');
+            const modalBody = document.getElementById('modalBody');
+            const data = techniqueData[technique];
+            modalBody.innerHTML = '<div class="modal-header"><div class="modal-icon">' + data.icon + '</div><div><h2 class="modal-title">' + data.title[currentLang] + '</h2><p class="modal-subtitle">' + data.subtitle[currentLang] + '</p></div></div><div class="modal-body">' + data.content[currentLang] + '</div>';
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('techniqueModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        function openBlogModal(blog) {
+            const modal = document.getElementById('blogModal');
+            const modalBody = document.getElementById('blogModalBody');
+            const data = blogData[blog];
+            modalBody.innerHTML = '<div class="modal-header"><div class="modal-icon">' + data.icon + '</div><div><h2 class="modal-title">' + data.title[currentLang] + '</h2></div></div><div class="modal-body">' + data.content[currentLang] + '</div>';
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeBlogModal() {
+            document.getElementById('blogModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        function openTherapistModal() {
+            const modal = document.getElementById('therapistModal');
+            const modalBody = document.getElementById('therapistModalBody');
+            const data = therapistData;
+            modalBody.innerHTML = '<div class="modal-header" style="border-bottom: none; margin-bottom: 0;"><h2 class="modal-title">' + data.title[currentLang] + '</h2></div><div class="therapist-modal-content"><div class="therapist-image-container"><img src="' + data.image + '" alt="Yeanin Ruvalcaba" class="therapist-image"></div><div class="therapist-text"><h3 class="therapist-name">' + data.name + '</h3><p class="therapist-credentials">' + data.credentials[currentLang] + '</p><div class="modal-body" style="white-space: pre-line;">' + data.intro[currentLang] + '</div></div></div>';
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeTherapistModal() {
+            document.getElementById('therapistModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('techniqueModal')) closeModal();
+            if (event.target == document.getElementById('blogModal')) closeBlogModal();
+            if (event.target == document.getElementById('therapistModal')) closeTherapistModal();
+        }
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.querySelectorAll('[data-es][data-en]').forEach(el => {
+                el.textContent = el.getAttribute('data-' + currentLang);
+            });
+            document.querySelector('.lang-toggle').textContent = currentLang === 'es' ? 'English' : 'Español';
+            document.documentElement.lang = currentLang;
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const message = currentLang === 'es' ? 'Mensaje enviado exitosamente!' : 'Message sent successfully!';
+            alert(message);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
