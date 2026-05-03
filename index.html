@@ -1691,6 +1691,236 @@
             this.reset();
         });
     </script>
+    <!-- ═══ TZ-WIDGET: INJECTED STYLES ═══ -->
+    <style>
+      #tz-widget-wrap {
+        position: fixed;
+        bottom: 120px;
+        right: 20px;
+        z-index: 999;
+        font-family: 'Lato', Arial, sans-serif;
+        width: 230px;
+      }
+      #tz-widget {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(90,122,140,0.18);
+        padding: 14px 16px 10px;
+        border: 1px solid #e8f0f4;
+        cursor: pointer;
+        transition: box-shadow 0.2s, transform 0.2s;
+        text-decoration: none;
+        display: block;
+        color: inherit;
+      }
+      #tz-widget:hover {
+        box-shadow: 0 8px 32px rgba(90,122,140,0.28);
+        transform: translateY(-2px);
+      }
+      .tz-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4px;
+      }
+      .tz-label {
+        font-size: 10px;
+        color: #8aabb8;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .tz-time {
+        font-size: 15px;
+        color: #5a7a8c;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+      .tz-divider {
+        border: none;
+        border-top: 1px solid #edf2f5;
+        margin: 7px 0;
+      }
+      .tz-diff-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+      .tz-diff-badge {
+        background: #eef5f8;
+        color: #5a7a8c;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 9px;
+        border-radius: 20px;
+      }
+      .tz-diff-label {
+        font-size: 10px;
+        color: #a0b8c4;
+      }
+      .tz-cta {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #f0f9f4;
+        border-radius: 10px;
+        padding: 7px 10px;
+        margin-top: 2px;
+        transition: background 0.15s;
+      }
+      #tz-widget:hover .tz-cta {
+        background: #25d366;
+      }
+      #tz-widget:hover .tz-cta-text,
+      #tz-widget:hover .tz-cta-icon {
+        color: #fff;
+      }
+      .tz-cta-icon {
+        font-size: 16px;
+        color: #25d366;
+        line-height: 1;
+        transition: color 0.15s;
+      }
+      .tz-cta-text {
+        font-size: 11px;
+        color: #3d8f5f;
+        font-weight: 600;
+        line-height: 1.3;
+        transition: color 0.15s;
+      }
+      @media (max-width: 500px) {
+        #tz-widget-wrap {
+          width: 200px;
+          right: 14px;
+          bottom: 110px;
+        }
+        .tz-time { font-size: 13px; }
+      }
+    </style>
+
+    <!-- ═══ TZ-WIDGET: HTML ═══ -->
+    <div id="tz-widget-wrap">
+      <a id="tz-widget" href="#" target="_blank" rel="noopener">
+        <div class="tz-row">
+          <span class="tz-label">🌍 Your Time</span>
+          <span class="tz-time" id="tz-visitor-time">--:--</span>
+        </div>
+        <div class="tz-row">
+          <span class="tz-label">🇲🇽 My Time</span>
+          <span class="tz-time" id="tz-host-time">--:--</span>
+        </div>
+        <hr class="tz-divider">
+        <div class="tz-diff-row">
+          <span class="tz-diff-badge" id="tz-diff-badge">±0h</span>
+          <span class="tz-diff-label" id="tz-diff-label">time difference</span>
+        </div>
+        <div class="tz-cta">
+          <span class="tz-cta-icon">💬</span>
+          <span class="tz-cta-text">Want to book a time?<br>Chat on WhatsApp</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- ═══ TZ-WIDGET: SCRIPT ═══ -->
+    <script>
+    (function() {
+      'use strict';
+      var TZW = {
+        HOST_TZ: 'America/Mexico_City',
+        WA_NUMBER: '15624742818',
+        el: {
+          visitorTime: null,
+          hostTime:    null,
+          diffBadge:   null,
+          diffLabel:   null,
+          widget:      null,
+        },
+        _interval: null,
+
+        pad: function(n) { return n < 10 ? '0' + n : '' + n; },
+
+        formatTime: function(tz) {
+          try {
+            return new Intl.DateTimeFormat('en-US', {
+              timeZone: tz,
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+            }).format(new Date());
+          } catch(e) {
+            return '--:--';
+          }
+        },
+
+        getDiffMinutes: function(tzA, tzB) {
+          try {
+            var now = new Date();
+            var toMs = function(tz) {
+              return new Date(now.toLocaleString('en-US', { timeZone: tz })).getTime();
+            };
+            return Math.round((toMs(tzA) - toMs(tzB)) / 60000);
+          } catch(e) { return 0; }
+        },
+
+        diffText: function(mins) {
+          if (mins === 0) return { badge: '= 0h', label: 'same time zone' };
+          var abs = Math.abs(mins);
+          var h = Math.floor(abs / 60);
+          var m = abs % 60;
+          var badge = (mins > 0 ? '+' : '-');
+          if (h > 0) badge += h + 'h';
+          if (m > 0) badge += (h > 0 ? ' ' : '') + m + 'm';
+          var label = mins > 0 ? 'you are ahead' : 'you are behind';
+          return { badge: badge, label: label };
+        },
+
+        buildWALink: function(visitorTime, hostTime) {
+          var msg = encodeURIComponent(
+            'Hi! I want to book a time with you. My time is ' + visitorTime +
+            ', your time is ' + hostTime + '. Can we schedule a session?'
+          );
+          return 'https://wa.me/' + TZW.WA_NUMBER + '?text=' + msg;
+        },
+
+        tick: function() {
+          try {
+            var visitorTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            var vTime = TZW.formatTime(visitorTz);
+            var hTime = TZW.formatTime(TZW.HOST_TZ);
+            var diffMins = TZW.getDiffMinutes(visitorTz, TZW.HOST_TZ);
+            var dt = TZW.diffText(diffMins);
+
+            TZW.el.visitorTime.textContent = vTime;
+            TZW.el.hostTime.textContent    = hTime;
+            TZW.el.diffBadge.textContent   = dt.badge;
+            TZW.el.diffLabel.textContent   = dt.label;
+            TZW.el.widget.href = TZW.buildWALink(vTime, hTime);
+          } catch(e) {}
+        },
+
+        init: function() {
+          TZW.el.visitorTime = document.getElementById('tz-visitor-time');
+          TZW.el.hostTime    = document.getElementById('tz-host-time');
+          TZW.el.diffBadge   = document.getElementById('tz-diff-badge');
+          TZW.el.diffLabel   = document.getElementById('tz-diff-label');
+          TZW.el.widget      = document.getElementById('tz-widget');
+
+          if (!TZW.el.visitorTime || !TZW.el.widget) return;
+
+          TZW.tick();
+          TZW._interval = setInterval(TZW.tick, 60000);
+        }
+      };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', TZW.init);
+      } else {
+        TZW.init();
+      }
+    })();
+    </script>
+
     <div style="position:fixed; bottom:40px; right:40px; display:flex; align-items:center; z-index:1000; font-family: Arial, sans-serif;">
     
     <div style="background-color: white; padding: 10px 15px; border-radius: 20px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); margin-right: 10px; font-size: 14px; color: #444; font-weight: bold;">
@@ -1705,5 +1935,3 @@
 </div>
 </body>
 </html>
-
-
